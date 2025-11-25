@@ -34,7 +34,7 @@ export const authOptions = {
     async session({ session, token }) {
       const user = await User.findOne({ email: session.user.email });
       session.user = user;
-      console.log('session : ', session, 'token : ', token);
+      console.log('session from: ', session, 'token : ', token);
       return session;
     },
 

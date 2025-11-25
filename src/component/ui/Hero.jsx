@@ -18,20 +18,20 @@ export default function Hero() {
           </h1>
           <p className="mb-8 text-xl font-light text-gray-200 drop-shadow-md">
             The LifeStream Donor Network connects seekers with donors instantly.
-            Every second counts—your simple registration can make the difference
-            between life and death.
+            The Blood Request Hub quickly connects your need to potential local
+            donors.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link
-              href="/register"
+              href="/dashboard/add-request"
               className="btn btn-error btn-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.02]"
             >
               <FiPlus className="text-2xl mr-2" />
-              Join Our Donor Network
+              Request Blood
             </Link>
             <Link
-              href="/list"
+              href="/requests"
               className="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-red-600 transition duration-300"
             >
               <FiSearch className="text-2xl mr-2" />

@@ -1,4 +1,3 @@
-
 import './globals.css';
 import Footer from '@/component/ui/Footer';
 import connectDB from '@/lib/db';
@@ -16,7 +15,7 @@ export default async function RootLayout({ children }) {
   console.log(conn);
   return (
     <html lang="en">
-      <body className={` antialiased max-w-[1280px] mx-auto`}>
+      <body className="max-w-[1280px] mx-auto">
         <AuthProvider>
           <Navbar></Navbar>
           {children}

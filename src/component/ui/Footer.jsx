@@ -11,7 +11,7 @@ export default function Footer() {
       <aside>
         <MdBloodtype className="text-5xl text-red-600" />
         <p className="font-bold text-lg">
-          LifeStream Donor Network
+          Blood Hub
           <br />
           Providing reliable blood connection since 2024
         </p>
@@ -34,10 +34,7 @@ export default function Footer() {
       </nav>
 
       <aside>
-        <p>
-          Copyright © {currentYear} - All rights reserved by LifeStream Donor
-          Network
-        </p>
+        <p>Copyright © {currentYear} - All rights reserved by Blood Hub</p>
       </aside>
     </footer>
   );

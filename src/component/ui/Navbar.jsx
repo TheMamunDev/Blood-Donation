@@ -23,14 +23,10 @@ import { Button } from '@/components/ui/button';
 
 const navLinks = [
   { label: 'Home', to: '/', icon: <MdOutlineHome /> },
+
   {
-    label: 'Find Request',
-    to: '/properties',
-    icon: <MdOutlineRealEstateAgent />,
-  },
-  {
-    label: 'Donors',
-    to: '/add-property',
+    label: 'All Requests',
+    to: '/requests',
     icon: <MdNoteAdd />,
   },
   {
@@ -39,14 +35,14 @@ const navLinks = [
     icon: <MdRealEstateAgent />,
   },
   {
-    label: 'Add Products',
-    to: '/my-ratings',
+    label: 'Add Request',
+    to: '/add-request',
     icon: <MdStarBorder />,
     auth: true,
   },
   {
-    label: 'Manage Products',
-    to: '/my-ratings',
+    label: 'My Requests',
+    to: '/my-request',
     icon: <MdStarBorder />,
     auth: true,
   },
@@ -62,7 +58,7 @@ export default function Navbar() {
     <div className="navbar bg-base-200 shadow-md sticky top-0 z-50">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost text-xl font-bold text-red-500">
-          <MdBloodtype className="text-2xl mr-1" /> LifeStream Donors
+          <MdBloodtype className="text-2xl mr-1" /> Blood Hub
         </Link>
       </div>
 
@@ -72,10 +68,10 @@ export default function Navbar() {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/list">Find Requests</Link>
+            <Link href="/dashboard/my-request">My Requests</Link>
           </li>
           <li>
-            <Link href="/donors">Donors</Link>
+            <Link href="/requests">All Request</Link>
           </li>
           <li>
             <Link href="/about">About</Link>
@@ -99,15 +95,13 @@ export default function Navbar() {
                   className="dropdown-content menu p-2 bg-base-100 shadow rounded-box w-56"
                 >
                   <li>
-                    <Link href="/dashboard/add-product">
-                      <FiPlus /> Add Product
+                    <Link href="/dashboard/add-request">
+                      <FiPlus /> Add Request
                     </Link>
                   </li>
 
                   <li>
-                    <Link href="/dashboard/manage-products">
-                      Manage Products
-                    </Link>
+                    <Link href="/dashboard/my-request">Manage Request</Link>
                   </li>
 
                   <li>

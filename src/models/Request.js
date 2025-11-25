@@ -4,6 +4,11 @@ const RequestSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
+  },
+  userEmail: {
+    required: true,
+    type: String,
   },
   bloodGroupNeeded: { type: String, required: true },
   unitsNeeded: { type: Number, required: true, min: 1 },

@@ -37,13 +37,13 @@ export default function DonorSearchForm() {
       params.append('donorType', formData.donorType);
     }
 
-    router.push(`/donors?${params.toString()}`);
+    router.push(`/requests?${params.toString()}`);
   };
 
   return (
     <section className="bg-white py-12 px-6 rounded-lg shadow-2xl my-10 max-w-6xl mx-auto">
       <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
-        Search Donors
+        Search Blood Requests
       </h2>
 
       <form
@@ -89,7 +89,7 @@ export default function DonorSearchForm() {
         </div>
         <div className="form-control w-full md:w-1/5 relative">
           <label className="label hidden md:block">
-            <span className="label-text">Date of Blood Donation</span>
+            <span className="label-text">Date of Blood Request</span>
           </label>
           <input
             type="date"
@@ -100,23 +100,6 @@ export default function DonorSearchForm() {
             className="input input-bordered w-full pr-10"
           />
           <FiCalendar className="absolute right-3 top-[50%] transform -translate-y-1/2 text-gray-400 pointer-events-none hidden md:block" />
-        </div>
-        <div className="form-control w-full md:w-1/5">
-          <label className="label hidden md:block">
-            <span className="label-text">Donor Type</span>
-          </label>
-          <select
-            name="donorType"
-            value={formData.donorType}
-            onChange={handleChange}
-            className="select select-bordered w-full"
-          >
-            {donorTypes.map(type => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div className="form-control w-full md:w-auto mt-4 md:mt-0">
