@@ -1,31 +1,30 @@
-// src/components/landing/ImpactStats.jsx
 import React from 'react';
-import { FiUsers, FiHeart, FiDroplet, FiSend } from 'react-icons/fi';
+import { FiUsers, FiClock, FiSearch, FiTarget } from 'react-icons/fi';
 
 const statsData = [
   {
-    icon: FiUsers,
-    value: '15,000+',
-    label: 'Registered Donors',
-    color: 'text-primary',
-  },
-  {
-    icon: FiHeart,
-    value: '98%',
-    label: 'Successful Match Rate',
-    color: 'text-success',
-  },
-  {
-    icon: FiDroplet,
-    value: '5,200+',
-    label: 'Lives Supported Monthly',
+    icon: FiTarget,
+    value: '50+',
+    label: 'Active Open Requests',
     color: 'text-error',
   },
   {
-    icon: FiSend,
-    value: '5 Min',
-    label: 'Average Response Time',
+    icon: FiClock,
+    value: '24/7',
+    label: 'Urgent Request Monitoring',
     color: 'text-info',
+  },
+  {
+    icon: FiSearch,
+    value: '9,000+',
+    label: 'Registered Seekers',
+    color: 'text-primary',
+  },
+  {
+    icon: FiUsers,
+    value: '15 Min',
+    label: 'Avg. Donor Match Time',
+    color: 'text-success',
   },
 ];
 
@@ -33,7 +32,7 @@ export default function Impacts() {
   return (
     <section className="py-16 bg-base-100">
       <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
-        Our Impact at a Glance
+        Our Request Fulfillment Impact
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {statsData.map((stat, index) => (

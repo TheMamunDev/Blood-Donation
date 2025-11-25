@@ -36,13 +36,13 @@ const navLinks = [
   },
   {
     label: 'Add Request',
-    to: '/add-request',
+    to: '/dashboard/add-request',
     icon: <MdStarBorder />,
     auth: true,
   },
   {
     label: 'My Requests',
-    to: '/my-request',
+    to: '/dashboard/my-request',
     icon: <MdStarBorder />,
     auth: true,
   },

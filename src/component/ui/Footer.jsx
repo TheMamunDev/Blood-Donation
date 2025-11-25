@@ -7,7 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer footer-center p-10 bg-base-300 text-base-content border-t border-gray-200 mt-12">
+    <footer className="footer flex flex-col md:flex-row footer-center p-10 bg-base-300 text-base-content border-t border-gray-200 mt-12">
       <aside>
         <MdBloodtype className="text-5xl text-red-600" />
         <p className="font-bold text-lg">

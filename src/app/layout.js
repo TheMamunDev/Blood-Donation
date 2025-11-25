@@ -15,7 +15,7 @@ export default async function RootLayout({ children }) {
   console.log(conn);
   return (
     <html lang="en">
-      <body className="max-w-[1280px] mx-auto">
+      <body className="max-w-7xl mx-auto">
         <AuthProvider>
           <Navbar></Navbar>
           {children}
