@@ -7,18 +7,15 @@ import { toast } from 'react-toastify';
 import { createBloodRequest } from '@/actions/requestActions';
 import { useSession } from 'next-auth/react';
 
-export const metadata = {
-  title: 'Add Blood Request | Blood Hub',
-  description: 'Donate your blood today',
-};
-
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const priorities = ['Low', 'Medium', 'High', 'Critical'];
 
 export default function AddRequestForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-
+  useEffect(() => {
+    document.title = 'Add Blood Request | Blood Hub';
+  }, []);
   const handleSubmit = async e => {
     e.preventDefault();
 
