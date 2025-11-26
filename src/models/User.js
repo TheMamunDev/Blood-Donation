@@ -5,25 +5,17 @@ const userSchema = new Schema({
     required: true,
     type: String,
   },
-  password: {
-    required: true,
-    type: String,
-  },
+  password: { type: String, default: null },
   email: {
     required: true,
     type: String,
     unique: true,
   },
-  location: {
-    required: true,
-    type: String,
-  },
-  bloodGroup: {
-    required: true,
-    type: String,
-  },
+
   photo: {
-    required: true,
+    type: String,
+  },
+  authType: {
     type: String,
   },
   createdAt: { type: Date, default: Date.now },

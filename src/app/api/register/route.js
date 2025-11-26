@@ -4,10 +4,9 @@ import bcrypt from 'bcrypt';
 import { User } from '@/models/User';
 
 export const POST = async request => {
-  const { name, email, password, location, bloodGroup, photo } =
-    await request.json();
+  const { name, email, password, photo } = await request.json();
 
-  console.log(name, email, password, location, bloodGroup, photo);
+  console.log(name, email, password, photo);
   await connectDB();
   const exitsUser = await User.findOne({ email });
   if (exitsUser) {
@@ -22,8 +21,7 @@ export const POST = async request => {
     name,
     password: hashedPassword,
     email,
-    location,
-    bloodGroup,
+    authType: 'Crediantials',
     photo,
     createdAt: new Date(),
   };
@@ -37,7 +35,7 @@ export const POST = async request => {
   } catch (err) {
     console.log(err);
     return new NextResponse(
-      { message: err.mesage },
+      { message: ` massage from err ${err.mesage}` },
       {
         status: 500,
       }

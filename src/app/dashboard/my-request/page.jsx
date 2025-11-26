@@ -11,7 +11,6 @@ export default async function ManageRequestsPage() {
   if (!session) {
     redirect('/login');
   }
-
   const requests = await getMyBloodRequests();
 
   return (
@@ -46,7 +45,10 @@ export default async function ManageRequestsPage() {
             </span>
           </div>
           <div className="flex-none">
-            <Link href="/add-request" className="btn btn-sm btn-primary">
+            <Link
+              href="/dashboard/add-request"
+              className="btn btn-sm btn-primary"
+            >
               Submit Request
             </Link>
           </div>

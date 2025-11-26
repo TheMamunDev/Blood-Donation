@@ -1,27 +1,16 @@
 import './globals.css';
-import Footer from '@/component/ui/Footer';
-import connectDB from '@/lib/db';
-import { ToastContainer } from 'react-toastify';
-import { AuthProvider } from './Provider';
-import Navbar from '@/component/ui/Navbar';
+import LayoutProvider from '@/component/providers/LayoutProvider';
 
 export const metadata = {
   title: 'Blood Donation',
   description: 'Donate your donation',
 };
 
-export default async function RootLayout({ children }) {
-  const conn = await connectDB();
-  console.log(conn);
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="max-w-7xl mx-auto">
-        <AuthProvider>
-          <Navbar></Navbar>
-          {children}
-          <Footer></Footer>
-          <ToastContainer></ToastContainer>
-        </AuthProvider>
+        <LayoutProvider>{children}</LayoutProvider>
       </body>
     </html>
   );

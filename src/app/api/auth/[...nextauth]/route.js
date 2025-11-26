@@ -1,11 +1,18 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 import bcrypt from 'bcrypt';
 import { User } from '@/models/User';
 import connectDB from '@/lib/db';
+import { signIn } from 'next-auth/react';
+require('dotenv').config();
 
 export const authOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     Credentials({
       name: 'Credentials',
       credentials: {
@@ -31,6 +38,25 @@ export const authOptions = {
   ],
 
   callbacks: {
+    async signIn({ user, account }) {
+      await connectDB();
+      if (account.provider === 'google') {
+        const existingUser = await User.findOne({ email: user.email });
+
+        if (!existingUser) {
+          await User.create({
+            name: user.name,
+            email: user.email,
+            image: user.image,
+            password: null,
+            authType: 'google',
+          });
+        }
+      }
+
+      return true;
+    },
+
     async session({ session, token }) {
       const user = await User.findOne({ email: session.user.email });
       session.user = user;

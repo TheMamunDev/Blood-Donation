@@ -5,10 +5,10 @@ import connectDB from '@/lib/db';
 import Doners from '@/models/Request';
 import { isValidObjectId } from 'mongoose';
 import { getServerSession } from 'next-auth/next';
+import { revalidatePath } from 'next/cache';
 
 export async function createBloodRequest(formData) {
   const session = await getServerSession(authOptions);
-
   if (!session) {
     return {
       success: false,
@@ -17,7 +17,6 @@ export async function createBloodRequest(formData) {
   }
 
   await connectDB();
-
   const data = {
     userId: session.user.id,
     userEmail: session.user.email,
@@ -27,7 +26,7 @@ export async function createBloodRequest(formData) {
     contactNumber: formData.contactNumber,
     priority: formData.priority,
   };
-  console.log('data from before add to database', data);
+  await new Promise(res => setTimeout(res, 15400));
   try {
     const newRequest = await Doners.create(data);
 
@@ -99,5 +98,84 @@ export async function getAllOpenBloodRequests() {
   } catch (error) {
     console.error('Failed to fetch all blood requests:', error);
     return [];
+  }
+}
+
+export async function updateRequestStatus(requestId) {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user || !session.user.email) {
+    return { success: false, message: 'Unauthorized action.' };
+  }
+  if (!isValidObjectId(requestId)) {
+    return { success: false, message: 'Invalid request ID.' };
+  }
+  try {
+    await connectDB();
+    const request = await Doners.findById(requestId);
+
+    if (!request) {
+      return { success: false, message: 'Request not found.' };
+    }
+    if (request.userEmail !== session.user.email) {
+      return {
+        success: false,
+        message: 'You do not have permission to close this request.',
+      };
+    }
+
+    request.status = 'Closed';
+    request.updatedAt = new Date();
+    await request.save();
+    revalidatePath('/dashboard/my-request');
+    return {
+      success: true,
+      message: 'Request successfully closed and fulfilled!',
+    };
+  } catch (error) {
+    console.error('Database error during update:', error);
+    return {
+      success: false,
+      message: 'Server failed to update request status.',
+      error,
+    };
+  }
+}
+
+export async function deleteRequest(id) {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user || !session.user.email) {
+    return { success: false, message: 'Unauthorized action.' };
+  }
+  if (!isValidObjectId(id)) {
+    return { success: false, message: 'Invalid request ID.' };
+  }
+
+  try {
+    await connectDB();
+    const request = await Doners.findById(id);
+
+    if (!request) {
+      return { success: false, message: 'Request not found.' };
+    }
+    if (request.userEmail !== session.user.email) {
+      return {
+        success: false,
+        message: 'You do not have permission to Delete this request.',
+      };
+    }
+
+    await Doners.deleteOne({ _id: id });
+    revalidatePath('/dashboard/my-request');
+    return {
+      success: true,
+      message: 'Request Deleted Successfull!',
+    };
+  } catch (error) {
+    console.error('Database error during update:', error);
+    return {
+      success: false,
+      message: 'Server failed to delere request .',
+      error,
+    };
   }
 }

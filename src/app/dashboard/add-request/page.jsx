@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiPlusCircle, FiHeart, FiMapPin, FiPhone } from 'react-icons/fi';
 import { toast } from 'react-toastify';
@@ -10,12 +10,11 @@ const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const priorities = ['Low', 'Medium', 'High', 'Critical'];
 
 export default function AddRequestForm() {
-  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setLoading(true);
 
     const formData = {
       bloodGroupNeeded: e.target.bloodGroupNeeded.value,
@@ -24,17 +23,16 @@ export default function AddRequestForm() {
       contactNumber: e.target.contactNumber.value,
       priority: e.target.priority.value,
     };
+    startTransition(async () => {
+      const result = await createBloodRequest(formData);
 
-    const result = await createBloodRequest(formData);
-
-    if (result.success) {
-      toast.success(result.message);
-      // Optional: Redirect to the newly created item's detail page or the dashboard
-      router.push(`/list/${result.requestId}`);
-    } else {
-      toast.error(result.message);
-    }
-    setLoading(false);
+      if (result.success) {
+        toast.success(result.message);
+        router.push(`/request/${result.requestId}`);
+      } else {
+        toast.error(result.message);
+      }
+    });
   };
 
   return (
@@ -44,8 +42,7 @@ export default function AddRequestForm() {
           <FiPlusCircle className="mr-2" /> Submit New Blood Request
         </h2>
 
-        {/* Blood Group Needed Field [cite: 39] */}
-        <div className="form-control">
+        <div className="form-control fieldset">
           <label className="label">
             <span className="label-text flex items-center">
               <FiHeart className="mr-2" />
@@ -54,7 +51,7 @@ export default function AddRequestForm() {
           </label>
           <select
             name="bloodGroupNeeded"
-            className="select select-bordered"
+            className="select select-bordered w-full"
             required
           >
             <option value="">Select Required Blood Group</option>
@@ -65,9 +62,7 @@ export default function AddRequestForm() {
             ))}
           </select>
         </div>
-
-        {/* Units Needed Field [cite: 42] */}
-        <div className="form-control">
+        <div className="form-control fieldset">
           <label className="label">
             <span className="label-text">Units Needed (Bags)</span>
           </label>
@@ -76,17 +71,20 @@ export default function AddRequestForm() {
             name="unitsNeeded"
             placeholder="e.g., 2"
             min="1"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             required
           />
         </div>
 
-        {/* Priority Field [cite: 42] */}
-        <div className="form-control">
+        <div className="form-control fieldset">
           <label className="label">
             <span className="label-text">Priority Level</span>
           </label>
-          <select name="priority" className="select select-bordered" required>
+          <select
+            name="priority"
+            className="select w-full select-bordered"
+            required
+          >
             {priorities.map(p => (
               <option key={p} value={p}>
                 {p}
@@ -95,8 +93,7 @@ export default function AddRequestForm() {
           </select>
         </div>
 
-        {/* Hospital Name (Title) [cite: 39] */}
-        <div className="form-control">
+        <div className="form-control fieldset">
           <label className="label">
             <span className="label-text flex items-center">
               <FiMapPin className="mr-2" />
@@ -107,13 +104,12 @@ export default function AddRequestForm() {
             type="text"
             name="hospitalName"
             placeholder="e.g., City Trauma Center, Dhaka"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             required
           />
         </div>
 
-        {/* Contact Number (Short Description) [cite: 40] */}
-        <div className="form-control">
+        <div className="form-control fieldset">
           <label className="label">
             <span className="label-text flex items-center">
               <FiPhone className="mr-2" />
@@ -124,19 +120,18 @@ export default function AddRequestForm() {
             type="tel"
             name="contactNumber"
             placeholder="e.g., 01XXXXXXXXX"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             required
           />
         </div>
 
-        {/* Submit Button [cite: 44] */}
         <div className="form-control mt-6">
           <button
             type="submit"
             className="btn btn-error btn-lg"
-            disabled={loading}
+            disabled={isPending}
           >
-            {loading ? (
+            {isPending ? (
               <span className="loading loading-spinner"></span>
             ) : (
               'Submit Request'

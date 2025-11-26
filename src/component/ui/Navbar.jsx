@@ -68,7 +68,7 @@ export default function Navbar() {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/dashboard/my-request">My Requests</Link>
+            <Link href="/contact-us">Contact Us</Link>
           </li>
           <li>
             <Link href="/requests">All Request</Link>

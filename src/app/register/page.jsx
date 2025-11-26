@@ -3,15 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
 import { toast } from 'react-toastify';
-
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
 const registerSchema = z.object({
   name: z.string().min(1, 'Name Required!'),
@@ -23,10 +19,6 @@ const registerSchema = z.object({
     .regex(/[0-9]/, 'Must contain at least one number'),
 
   photo: z.string().url('Invalid photo URL'),
-  location: z.string().min(1, 'Location Required!'),
-  bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'], {
-    required_error: 'Blood group is required',
-  }),
 });
 
 export default function RegisterPage() {
@@ -45,8 +37,6 @@ export default function RegisterPage() {
       name: data.name,
       email: data.email,
       password: data.password,
-      bloodGroup: data.bloodGroup,
-      location: data.location,
       photo: data.photo,
     };
     console.log(registrationData);
@@ -85,7 +75,7 @@ export default function RegisterPage() {
       <div className="card w-full max-w-lg shadow-2xl bg-base-200">
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="card-title text-3xl justify-center text-red-600 mb-6">
-            Join LifeStream Network
+            Join Blood Hub
           </h2>
           <div class="card bg-base-100 shrink-0 shadow-2xl">
             <div class="card-body">
@@ -119,32 +109,6 @@ export default function RegisterPage() {
                 />
                 {errors.password && (
                   <p className="text-red-400">{errors.password.message}</p>
-                )}
-                <label className="label ">Location </label>
-                <input
-                  {...register('location')}
-                  type="text"
-                  class="input w-full"
-                  placeholder="Your City/District"
-                />
-                {errors.location && (
-                  <p className="text-red-400">{errors.location.message}</p>
-                )}
-                <label className="label">Blood Group </label>
-                <select
-                  {...register('bloodGroup')}
-                  className="select select-bordered w-full"
-                  required
-                >
-                  <option value="">Select your Blood Group</option>
-                  {bloodGroups.map(group => (
-                    <option key={group} value={group}>
-                      {group}
-                    </option>
-                  ))}
-                </select>
-                {errors.bloodGroup && (
-                  <p className="text-red-400">{errors.bloodGroup.message}</p>
                 )}
 
                 <label className="label">Photo URL </label>
