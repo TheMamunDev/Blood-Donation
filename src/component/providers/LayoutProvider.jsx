@@ -3,16 +3,18 @@ import { AuthProvider } from '@/app/Provider';
 import Navbar from '../ui/Navbar';
 import Footer from '../ui/Footer';
 import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'react-hot-toast';
 
 export default function LayoutProvider({ children }) {
   return (
-    <body className="max-w-7xl mx-auto">
+    <div>
       <AuthProvider>
         <Navbar />
-        {children}
+        <div className="max-w-11/12 mx-auto">{children}</div>
+
         <Footer />
-        <ToastContainer />
+        <Toaster position="top-right" />
       </AuthProvider>
-    </body>
+    </div>
   );
 }

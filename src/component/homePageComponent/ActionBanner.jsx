@@ -5,7 +5,7 @@ import { FiPlus, FiPhoneCall } from 'react-icons/fi';
 
 export default function ActionBanner() {
   return (
-    <section className="py-16 bg-error rounded-xl shadow-2xl my-12 max-w-6xl mx-auto">
+    <section className="py-16 bg-error rounded-xl shadow-2xl my-12 max-w-7xl mx-auto">
       <div className="text-center text-white p-6">
         <h2 className="text-5xl font-extrabold mb-3">
           Need Blood Urgently? Start Here.
@@ -15,7 +15,7 @@ export default function ActionBanner() {
           call our emergency line.
         </p>
 
-        <div className="flex justify-center space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
           <Link
             href="/dashboard/add-request"
             className="btn btn-warning btn-lg shadow-lg hover:shadow-xl"
@@ -24,13 +24,10 @@ export default function ActionBanner() {
             Submit New Request
           </Link>
 
-          <a
-            href="tel:999"
-            className="btn btn-ghost btn-lg border-white text-white hover:bg-white hover:text-error"
-          >
-            <FiPhoneCall className="text-2xl mr-2" />
+          <button className="btn btn-ghost btn-lg border-white text-white hover:bg-white hover:text-error">
+            <FiPhoneCall className="text-2xl" />
             Call Emergency Hotline
-          </a>
+          </button>
         </div>
       </div>
     </section>

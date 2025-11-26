@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 @plugin "daisyui";
 
+@theme {
+  --breakpoint-xs: 20rem;
+}
+
 /* Target the main progress bar container */
 #nprogress {
   /* Set position and z-index globally to override SweetAlert2 */

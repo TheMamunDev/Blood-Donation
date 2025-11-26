@@ -1,6 +1,6 @@
 import { getAllOpenBloodRequests } from '@/actions/requestActions';
 import DonorSearchForm from '@/component/homePageComponent/DonersSearch';
-import MyRequestedCard from '@/component/manage/MyRequestCard';
+import RequestCard from '@/component/manage/RequestCard';
 
 import { FiList } from 'react-icons/fi';
 
@@ -10,10 +10,11 @@ export default async function RequestListPage({ searchParams }) {
 
   return (
     <div className="py-10">
-      <h1 className="text-4xl font-extrabold text-center mb-2 text-gray-800 flex items-center justify-center">
-        <FiList className="mr-3 text-red-600" /> Urgent Blood Request Board
+      <h1 className="text-2xl md:text-4xl font-extrabold text-center mb-2 text-gray-800 flex items-center justify-center">
+        <FiList className="mr-3 hidden sm:block text-red-600" /> Urgent Blood
+        Request Board
       </h1>
-      <p className="text-xl text-center mb-8 text-gray-500 max-w-2xl mx-auto">
+      <p className="text-lg md:text-xl text-center mb-8 text-gray-500 max-w-2xl mx-auto">
         Browse all immediate and pending blood needs across the network. Filter
         by blood group and location to find the closest match.
       </p>
@@ -48,7 +49,7 @@ export default async function RequestListPage({ searchParams }) {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {filteredRequests.map(request => (
-            <MyRequestedCard key={request._id} request={request} />
+            <RequestCard key={request._id} request={request} />
           ))}
         </div>
       )}

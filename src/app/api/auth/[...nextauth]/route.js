@@ -38,7 +38,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       await connectDB();
       if (account.provider === 'google') {
         const existingUser = await User.findOne({ email: user.email });
@@ -47,7 +47,7 @@ export const authOptions = {
           await User.create({
             name: user.name,
             email: user.email,
-            image: user.image,
+            photo: user.image || profile.picture,
             password: null,
             authType: 'google',
           });
@@ -62,22 +62,6 @@ export const authOptions = {
       session.user = user;
       console.log('session from: ', session, 'token : ', token);
       return session;
-    },
-
-    async signIn({ user, account }) {
-      if (account.provider === 'google') {
-        await connectDB();
-        const exists = await User.findOne({ email: user.email });
-
-        if (!exists) {
-          await User.create({
-            name: user.name,
-            email: user.email,
-            image: user.image,
-          });
-        }
-      }
-      return true;
     },
   },
 

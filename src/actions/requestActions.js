@@ -101,6 +101,17 @@ export async function getAllOpenBloodRequests() {
   }
 }
 
+export async function feturedRequest() {
+  try {
+    await connectDB();
+    const res = await Doners.find().sort({ createdAt: -1 }).limit(6).lean();
+    return JSON.parse(JSON.stringify(res));
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export async function updateRequestStatus(requestId) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user || !session.user.email) {

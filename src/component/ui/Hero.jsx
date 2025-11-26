@@ -11,12 +11,12 @@ export default function Hero() {
       }}
     >
       <div className="hero-overlay bg-black opacity-60"></div>
-      <div className="hero-content text-center text-neutral-content py-16">
+      <div className="hero-content text-center text-neutral-content py-6 md:py-16">
         <div className="max-w-4xl">
-          <h1 className="text-6xl font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+          <h1 className="text-3xl md:text-6xl font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
             Be a Lifesaver. Donate Blood Today.
           </h1>
-          <p className="mb-8 text-xl font-light text-gray-200 drop-shadow-md">
+          <p className="mb-8 text-lg md:text-xl font-light text-gray-200 drop-shadow-md">
             The LifeStream Donor Network connects seekers with donors instantly.
             The Blood Request Hub quickly connects your need to potential local
             donors.
@@ -25,14 +25,14 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link
               href="/dashboard/add-request"
-              className="btn btn-error btn-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.02]"
+              className="btn btn-error btn-sm sm:btn-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.02]"
             >
               <FiPlus className="text-2xl mr-2" />
               Request Blood
             </Link>
             <Link
               href="/requests"
-              className="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-red-600 transition duration-300"
+              className="btn btn-outline btn-sm sm:btn-lg text-white border-white hover:bg-white hover:text-red-600 transition duration-300"
             >
               <FiSearch className="text-2xl mr-2" />
               Find Urgent Requests

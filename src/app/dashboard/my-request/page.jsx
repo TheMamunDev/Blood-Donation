@@ -15,8 +15,9 @@ export default async function ManageRequestsPage() {
 
   return (
     <div className="py-10 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-extrabold mb-2 text-gray-800 flex items-center">
-        <FiArchive className="mr-3 text-red-600" /> My Blood Requests
+      <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-800 flex items-center">
+        <FiArchive className="mr-3 text-red-600 hidden md:block" /> My Blood
+        Requests
       </h1>
       <p className="text-lg text-gray-500 mb-8">
         Hello, {session.user.name || session.user.email}. Manage all your

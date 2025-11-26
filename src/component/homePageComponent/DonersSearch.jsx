@@ -42,7 +42,7 @@ export default function DonorSearchForm() {
 
   return (
     <section className="bg-white py-12 px-6 rounded-lg shadow-2xl my-10 max-w-6xl mx-auto">
-      <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
+      <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 text-gray-800">
         Search Blood Requests
       </h2>
 

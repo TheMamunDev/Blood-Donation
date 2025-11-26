@@ -66,12 +66,14 @@ export default function MyRequestedCard({ request }) {
   return (
     <div className="card bg-white shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] border-l-4 border-red-500">
       <div className="card-body p-6">
-        <div className="flex justify-between items-start">
-          <h2 className="card-title text-3xl font-extrabold text-red-600">
+        <div className="flex flex-col xs:flex-row justify-between items-centert">
+          <h2 className="card-title text-lg md:text-3xl font-extrabold text-red-600">
             {request.bloodGroupNeeded} ({request.unitsNeeded} Units)
           </h2>
           <div
-            className={`badge ${getBadgeClass(request.priority)} text-white`}
+            className={`badge ${getBadgeClass(
+              request.priority
+            )} text-white whitespace-nowrap`}
           >
             {request.priority} Priority
           </div>

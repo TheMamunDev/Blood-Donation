@@ -23,18 +23,24 @@ export default function RequestCard({ request }) {
   return (
     <div className="card bg-base-100 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
       <div className="card-body p-6">
-        <div className="text-6xl text-red-600 mb-3 flex items-center">
-          <MdBloodtype />
-        </div>
-
-        <h2 className="card-title text-3xl font-extrabold text-red-600 mb-2">
-          {request.bloodGroupNeeded}
-          <div
-            className={`badge ${getBadgeClass(request.priority)} ml-3 text-sm`}
-          >
-            {request.priority} Priority
+        <div className="flex flex-col xs:flex-row justify-between items-center">
+          <div className="text-5xl text-red-600 mb-3 flex items-center">
+            <MdBloodtype />
           </div>
-        </h2>
+          <h2 className="flex items-center justify-between font-bold text-red-600 mb-2">
+            {request.bloodGroupNeeded}
+            <div
+              className={`badge ${getBadgeClass(
+                request.priority
+              )} ml-3 text-sm `}
+            >
+              <p className="text-sm whitespace-nowrap">
+                {' '}
+                {request.priority} Priority
+              </p>
+            </div>
+          </h2>
+        </div>
 
         <p className="text-gray-600 h-10 overflow-hidden text-ellipsis">
           {shortDescription}
@@ -56,7 +62,7 @@ export default function RequestCard({ request }) {
 
         <div className="card-actions justify-end mt-4">
           <Link
-            href={`/list/${request._id}`}
+            href={`/request/${request._id}`}
             className="btn btn-sm btn-outline btn-error"
           >
             <FiEye /> View Details

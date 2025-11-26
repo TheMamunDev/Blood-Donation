@@ -25,7 +25,6 @@ export default function AddRequestForm() {
     };
     startTransition(async () => {
       const result = await createBloodRequest(formData);
-
       if (result.success) {
         toast.success(result.message);
         router.push(`/request/${result.requestId}`);
@@ -38,8 +37,9 @@ export default function AddRequestForm() {
   return (
     <div className="card w-full max-w-2xl mx-auto shadow-xl bg-base-100 mt-8">
       <form onSubmit={handleSubmit} className="card-body">
-        <h2 className="card-title text-3xl mb-6 text-red-600">
-          <FiPlusCircle className="mr-2" /> Submit New Blood Request
+        <h2 className="card-title text-2xl md:text-3xl mb-6 text-red-600">
+          <FiPlusCircle className="mr-2 hidden md:block" /> Submit New Blood
+          Request
         </h2>
 
         <div className="form-control fieldset">
@@ -128,7 +128,7 @@ export default function AddRequestForm() {
         <div className="form-control mt-6">
           <button
             type="submit"
-            className="btn btn-error btn-lg"
+            className="btn btn-error btn-sm md:btn-lg"
             disabled={isPending}
           >
             {isPending ? (
