@@ -143,12 +143,13 @@ export default function Navbar() {
             {navLinks
               .filter(item => !item.auth || isAuthenticated)
               .map((item, idx) => (
-                <DropdownMenuItem key={idx}>
-                  <Link href={item.to} className="flex items-center gap-1">
-                    {item.label}
-                  </Link>
-                  <DropdownMenuShortcut>IC</DropdownMenuShortcut>
-                </DropdownMenuItem>
+                <Link
+                  key={idx}
+                  href={item.to}
+                  className="flex items-center gap-1"
+                >
+                  <DropdownMenuItem>{item.label}</DropdownMenuItem>
+                </Link>
               ))}
             {isAuthenticated ? (
               <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>

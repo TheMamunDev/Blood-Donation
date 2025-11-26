@@ -15,7 +15,6 @@ export async function createBloodRequest(formData) {
       message: 'Authorization failed. Must be logged in.',
     };
   }
-
   await connectDB();
   const data = {
     userId: session.user.id,
@@ -26,7 +25,7 @@ export async function createBloodRequest(formData) {
     contactNumber: formData.contactNumber,
     priority: formData.priority,
   };
-  await new Promise(res => setTimeout(res, 15400));
+
   try {
     const newRequest = await Doners.create(data);
 
