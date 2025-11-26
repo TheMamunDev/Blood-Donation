@@ -29,8 +29,6 @@ export const authOptions = {
           user.password || ''
         );
         if (!passwordMatch) throw new Error('Incorrect password');
-
-        // Return a clean object, not the Mongoose document
         return {
           id: user._id.toString(),
           name: user.name,
@@ -64,8 +62,6 @@ export const authOptions = {
       await connectDB();
       const user = await User.findOne({ email: session.user.email }).lean();
       if (!user) return session;
-
-      // Always return a plain object with proper id
       session.user = {
         id: user._id.toString(),
         name: user.name,
@@ -77,7 +73,6 @@ export const authOptions = {
     },
 
     async jwt({ token, user }) {
-      // Persist user id in the JWT token
       if (user) {
         token.id = user.id;
       }

@@ -1,14 +1,21 @@
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
-import { FiArchive } from 'react-icons/fi';
-import Link from 'next/link';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getMyBloodRequests } from '@/actions/requestActions';
 import MyRequestedCard from '@/component/manage/MyRequestCard';
+import Link from 'next/link';
+import { FiArchive } from 'react-icons/fi';
+
+export const revalidate = 10;
+
 export default async function ManageRequestsPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
+
   const requests = await getMyBloodRequests();
+
   return (
     <div className="py-10 max-w-7xl mx-auto">
       <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-800 flex items-center">
@@ -16,7 +23,8 @@ export default async function ManageRequestsPage() {
         Requests
       </h1>
       <p className="text-lg text-gray-500 mb-8">
-        Manage all your submitted blood requests and check their status.
+        Hello, {session.user.name || session.user.email}. Manage all your
+        submitted blood requests and check their status.
       </p>
 
       {requests.length === 0 ? (
@@ -33,7 +41,7 @@ export default async function ManageRequestsPage() {
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
+              />
             </svg>
             <span>
               You have no active or fulfilled blood requests. Start by
