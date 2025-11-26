@@ -8,16 +8,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getMyBloodRequests } from '@/actions/requestActions';
 import MyRequestedCard from '@/component/manage/MyRequestCard';
 export default async function ManageRequestsPage() {
-  console.log('my requrst page entered');
-  const session = await getServerSession(authOptions);
-  console.log('got session');
-  if (!session) {
-    console.log('session fail');
-    redirect('/login');
-  }
-  console.log('fetching data');
   const requests = await getMyBloodRequests();
-  console.log(requests);
   return (
     <div className="py-10 max-w-7xl mx-auto">
       <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-800 flex items-center">
@@ -25,8 +16,7 @@ export default async function ManageRequestsPage() {
         Requests
       </h1>
       <p className="text-lg text-gray-500 mb-8">
-        Hello, {session.user.name || session.user.email}. Manage all your
-        submitted blood requests and check their status.
+        Manage all your submitted blood requests and check their status.
       </p>
 
       {requests.length === 0 ? (
