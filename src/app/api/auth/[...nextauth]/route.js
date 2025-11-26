@@ -4,8 +4,6 @@ import GoogleProvider from 'next-auth/providers/google';
 import bcrypt from 'bcrypt';
 import { User } from '@/models/User';
 import connectDB from '@/lib/db';
-import { signIn } from 'next-auth/react';
-require('dotenv').config();
 
 export const authOptions = {
   providers: [
@@ -16,52 +14,74 @@ export const authOptions = {
     Credentials({
       name: 'Credentials',
       credentials: {
-        email: {},
-        password: {},
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
-
       async authorize(credentials) {
-        const { email, password } = credentials;
         await connectDB();
+        const { email, password } = credentials;
 
-        const user = await User.findOne({ email: email });
-
+        const user = await User.findOne({ email }).lean();
         if (!user) throw new Error('User not found');
 
-        const passwordMatch = await bcrypt.compare(password, user.password);
-
+        const passwordMatch = await bcrypt.compare(
+          password,
+          user.password || ''
+        );
         if (!passwordMatch) throw new Error('Incorrect password');
 
-        return user;
+        // Return a clean object, not the Mongoose document
+        return {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+          image: user.photo,
+          authType: user.authType,
+        };
       },
     }),
   ],
 
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       await connectDB();
       if (account.provider === 'google') {
-        const existingUser = await User.findOne({ email: user.email });
-
+        const existingUser = await User.findOne({ email: user.email }).lean();
         if (!existingUser) {
           await User.create({
             name: user.name,
             email: user.email,
-            photo: user.image || profile.picture,
+            photo: user.image || user.picture || null,
             password: null,
             authType: 'google',
           });
         }
       }
-
       return true;
     },
 
     async session({ session, token }) {
-      const user = await User.findOne({ email: session.user.email });
-      session.user = user;
-      console.log('session from: ', session, 'token : ', token);
+      await connectDB();
+      const user = await User.findOne({ email: session.user.email }).lean();
+      if (!user) return session;
+
+      // Always return a plain object with proper id
+      session.user = {
+        id: user._id.toString(),
+        name: user.name,
+        email: user.email,
+        image: user.photo,
+        authType: user.authType,
+      };
       return session;
+    },
+
+    async jwt({ token, user }) {
+      // Persist user id in the JWT token
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
 
