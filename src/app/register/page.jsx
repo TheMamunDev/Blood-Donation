@@ -24,6 +24,9 @@ const registerSchema = z.object({
 });
 
 export default function RegisterPage() {
+  useEffect(() => {
+    document.title = 'Registration | Blood Hub';
+  }, []);
   const { status } = useSession();
   const {
     register,

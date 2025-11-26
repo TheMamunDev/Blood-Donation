@@ -2,8 +2,11 @@ import './globals.css';
 import LayoutProvider from '@/component/providers/LayoutProvider';
 
 export const metadata = {
-  title: 'Blood Donation',
-  description: 'Donate your donation',
+  // title: 'Blood Donation',
+  description: 'Donate your blood today',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -6,18 +6,19 @@ import MyRequestedCard from '@/component/manage/MyRequestCard';
 import Link from 'next/link';
 import { FiArchive } from 'react-icons/fi';
 
+export const metadata = {
+  title: 'My Requests | Blood Hub',
+  description: 'Donate your blood today',
+};
+
 export const revalidate = 10;
+const session = await getServerSession(authOptions);
 
 export default async function ManageRequestsPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect('/login');
-  }
-
   const requests = await getMyBloodRequests();
 
   return (
-    <div className="py-10 max-w-7xl mx-auto">
+    <div className="py-10 min-h-screen">
       <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-800 flex items-center">
         <FiArchive className="mr-3 text-red-600 hidden md:block" /> My Blood
         Requests

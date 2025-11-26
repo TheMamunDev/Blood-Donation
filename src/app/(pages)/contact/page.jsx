@@ -1,6 +1,11 @@
 import ContactForm from '@/component/ui/ContactForm';
 import { FiPhone, FiMapPin, FiMail } from 'react-icons/fi';
 
+export const metadata = {
+  title: 'Contact Us | Blood Hub',
+  description: 'Donate your blood today',
+};
+
 export default function ContactPage() {
   return (
     <div className="py-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">

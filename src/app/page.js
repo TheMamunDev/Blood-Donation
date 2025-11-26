@@ -4,6 +4,10 @@ import DonorSearchForm from '@/component/homePageComponent/DonersSearch';
 import FeaturedReq from '@/component/homePageComponent/FeaturedReq';
 import Impacts from '@/component/homePageComponent/Impact';
 import Testomonials from '@/component/homePageComponent/Testomonials';
+export const metadata = {
+  title: 'Home | Blood Hub',
+  description: 'Donate your blood today',
+};
 
 export default function Home() {
   return (

@@ -1,5 +1,9 @@
 import { FiTarget, FiHeart, FiUsers, FiGlobe } from 'react-icons/fi';
 import Link from 'next/link';
+export const metadata = {
+  title: 'About Us | Blood Hub',
+  description: 'Donate your blood today',
+};
 
 export default function AboutPage() {
   return (

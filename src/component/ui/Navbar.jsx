@@ -2,62 +2,71 @@
 
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-import { useState } from 'react';
+
 import { FiUser, FiLogOut, FiLogIn, FiMenu, FiPlus } from 'react-icons/fi';
+import { TiInfoLargeOutline } from 'react-icons/ti';
+import { BiSolidDonateBlood } from 'react-icons/bi';
 import {
   MdBloodtype,
-  MdNoteAdd,
+  MdOutlineBloodtype,
+  MdOutlineContactMail,
   MdOutlineHome,
-  MdOutlineRealEstateAgent,
-  MdRealEstateAgent,
-  MdStarBorder,
 } from 'react-icons/md';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { label: 'Home', to: '/', icon: <MdOutlineHome /> },
-
   {
     label: 'All Requests',
     to: '/requests',
-    icon: <MdNoteAdd />,
+    icon: <BiSolidDonateBlood />,
   },
   {
     label: 'Add Request',
     to: '/dashboard/add-request',
-    icon: <MdStarBorder />,
+    icon: <MdOutlineBloodtype />,
     auth: true,
   },
   {
     label: 'My Requests',
     to: '/dashboard/my-request',
-    icon: <MdStarBorder />,
+    icon: <MdOutlineBloodtype />,
     auth: true,
   },
   {
     label: 'About',
     to: '/about',
-    icon: <MdRealEstateAgent />,
+    icon: <TiInfoLargeOutline />,
   },
   {
     label: 'Contact Us',
     to: '/contact',
-    icon: <MdRealEstateAgent />,
+    icon: <MdOutlineContactMail />,
   },
 ];
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const [open, setOpen] = useState(false);
+  const pathName = usePathname();
 
   const isLoading = status === 'loading';
   const isAuthenticated = status === 'authenticated';
+
+  const activeClass = href => {
+    if (href === '/')
+      return pathName === '/'
+        ? 'bg-red-600 text-white'
+        : 'text-gray-700 hover:bg-gray-200';
+    return pathName.startsWith(href)
+      ? 'bg-red-600 text-white'
+      : 'text-gray-700 hover:bg-gray-200';
+  };
 
   return (
     <div className="navbar bg-base-200 shadow-md sticky top-0 z-50">
@@ -69,18 +78,21 @@ export default function Navbar() {
 
       <div className="hidden lg:flex">
         <ul className="menu menu-horizontal px-1 items-center">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/requests">All Request</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact Us</Link>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
+          {navLinks.map(link => {
+            if (link.auth) return null;
+            return (
+              <li key={link.to}>
+                <Link
+                  href={link.to}
+                  className={`px-3 py-2 rounded-md font-medium ${activeClass(
+                    link.to
+                  )}`}
+                >
+                  {link.icon} {link.label}
+                </Link>
+              </li>
+            );
+          })}
           <li>
             {isLoading && (
               <span className="loading loading-spinner text-red-500"></span>
@@ -99,15 +111,21 @@ export default function Navbar() {
                   tabIndex={0}
                   className="dropdown-content menu p-2 bg-base-100 shadow rounded-box w-56"
                 >
-                  <li>
-                    <Link href="/dashboard/add-request">
-                      <FiPlus /> Add Request
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link href="/dashboard/my-request">Manage Request</Link>
-                  </li>
+                  {navLinks.map(link => {
+                    if (!link.auth) return null;
+                    return (
+                      <li key={link.to}>
+                        <Link
+                          href={link.to}
+                          className={`px-3 py-2 rounded-md font-medium ${activeClass(
+                            link.to
+                          )}`}
+                        >
+                          {link.icon} {link.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
 
                   <li>
                     <button

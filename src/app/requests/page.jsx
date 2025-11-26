@@ -4,6 +4,11 @@ import RequestCard from '@/component/manage/RequestCard';
 
 import { FiList } from 'react-icons/fi';
 
+export const metadata = {
+  title: 'All Bloods | Blood Hub',
+  description: 'Donate your blood today',
+};
+
 export default async function RequestListPage({ searchParams }) {
   const allRequests = await getAllOpenBloodRequests();
   let filteredRequests = allRequests;

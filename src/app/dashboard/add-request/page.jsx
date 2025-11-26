@@ -1,10 +1,16 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiPlusCircle, FiHeart, FiMapPin, FiPhone } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { createBloodRequest } from '@/actions/requestActions';
+import { useSession } from 'next-auth/react';
+
+export const metadata = {
+  title: 'Add Blood Request | Blood Hub',
+  description: 'Donate your blood today',
+};
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const priorities = ['Low', 'Medium', 'High', 'Critical'];
