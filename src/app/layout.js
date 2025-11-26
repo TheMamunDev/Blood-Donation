@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body className="max-w-7xl mx-auto">
         <LayoutProvider>{children}</LayoutProvider>
       </body>

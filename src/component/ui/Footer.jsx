@@ -21,14 +21,11 @@ export default function Footer() {
           <Link href="/about" className="link link-hover">
             About Us
           </Link>
-          <Link href="/list" className="link link-hover">
+          <Link href="/requests" className="link link-hover">
             Find Requests
           </Link>
           <Link href="/contact" className="link link-hover">
             Contact
-          </Link>
-          <Link href="/privacy" className="link link-hover">
-            Privacy Policy
           </Link>
         </div>
       </nav>

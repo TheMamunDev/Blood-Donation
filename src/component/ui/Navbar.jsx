@@ -30,11 +30,6 @@ const navLinks = [
     icon: <MdNoteAdd />,
   },
   {
-    label: 'About',
-    to: '/my-properties',
-    icon: <MdRealEstateAgent />,
-  },
-  {
     label: 'Add Request',
     to: '/dashboard/add-request',
     icon: <MdStarBorder />,
@@ -45,6 +40,16 @@ const navLinks = [
     to: '/dashboard/my-request',
     icon: <MdStarBorder />,
     auth: true,
+  },
+  {
+    label: 'About',
+    to: '/about',
+    icon: <MdRealEstateAgent />,
+  },
+  {
+    label: 'Contact Us',
+    to: '/contact',
+    icon: <MdRealEstateAgent />,
   },
 ];
 export default function Navbar() {
@@ -71,7 +76,7 @@ export default function Navbar() {
             <Link href="/requests">All Request</Link>
           </li>
           <li>
-            <Link href="/contact-us">Contact Us</Link>
+            <Link href="/contact">Contact Us</Link>
           </li>
           <li>
             <Link href="/about">About</Link>

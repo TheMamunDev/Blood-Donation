@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
 @plugin "daisyui";
-
+/* @plugin "daisyui/theme" {
+  name: 'light';
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+} */
 @theme {
   --breakpoint-xs: 20rem;
 }

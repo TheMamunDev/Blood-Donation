@@ -18,10 +18,10 @@ const getBadgeClass = priority => {
 export default function RequestCard({ request }) {
   const shortDescription = `${
     request.hospitalName
-  }. Contact: ${request.contactNumber.substring(0, 5)}...`;
+  }. Contact: ${request.contactNumber.substring(0, 7)}...`;
 
   return (
-    <div className="card bg-base-100 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+    <div className="card bg-red-100 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
       <div className="card-body p-6">
         <div className="flex flex-col xs:flex-row justify-between items-center">
           <div className="text-5xl text-red-600 mb-3 flex items-center">
@@ -42,11 +42,11 @@ export default function RequestCard({ request }) {
           </h2>
         </div>
 
-        <p className="text-gray-600 h-10 overflow-hidden text-ellipsis">
+        <p className="text-black h-10 overflow-hidden text-ellipsis">
           {shortDescription}
         </p>
 
-        <div className="space-y-1 mt-3 text-sm text-gray-500">
+        <div className="space-y-1 mt-3 text-sm text-black">
           <p className="flex items-center">
             <FiMapPin className="mr-2 text-primary" /> {request.hospitalName}
           </p>
@@ -63,7 +63,7 @@ export default function RequestCard({ request }) {
         <div className="card-actions justify-end mt-4">
           <Link
             href={`/request/${request._id}`}
-            className="btn btn-sm btn-outline btn-error"
+            className="btn btn-sm btn-outline btn-error text-black"
           >
             <FiEye /> View Details
           </Link>

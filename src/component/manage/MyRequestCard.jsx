@@ -64,9 +64,9 @@ export default function MyRequestedCard({ request }) {
     }
   };
   return (
-    <div className="card bg-white shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] border-l-4 border-red-500">
+    <div className="card bg-red-100  shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] border-l-4 border-red-500">
       <div className="card-body p-6">
-        <div className="flex flex-col xs:flex-row justify-between items-centert">
+        <div className="flex flex-col xs:flex-row justify-between items-center">
           <h2 className="card-title text-lg md:text-3xl font-extrabold text-red-600">
             {request.bloodGroupNeeded} ({request.unitsNeeded} Units)
           </h2>
@@ -94,6 +94,10 @@ export default function MyRequestedCard({ request }) {
         <div className="divider my-1"></div>
 
         <div className="card-actions justify-end space-x-2">
+          <button className="btn btn-sm btn-error text-white">
+            <Link href={`/request/${request._id}`}>View</Link>
+          </button>
+
           <button
             disabled={request.status === 'Closed'}
             onClick={handleCloseRequest}
@@ -103,7 +107,7 @@ export default function MyRequestedCard({ request }) {
           </button>
           <button
             onClick={handleDelete}
-            className="btn btn-sm btn-error btn-outline"
+            className="btn btn-sm btn-error btn-outline text-black"
           >
             <FiTrash2 /> Delete
           </button>
