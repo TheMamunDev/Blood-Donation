@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import { FiArchive } from 'react-icons/fi';
@@ -6,13 +8,16 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getMyBloodRequests } from '@/actions/requestActions';
 import MyRequestedCard from '@/component/manage/MyRequestCard';
 export default async function ManageRequestsPage() {
+  console.log('my requrst page entered');
   const session = await getServerSession(authOptions);
-
+  console.log('got session');
   if (!session) {
+    console.log('session fail');
     redirect('/login');
   }
+  console.log('fetching data');
   const requests = await getMyBloodRequests();
-
+  console.log(requests);
   return (
     <div className="py-10 max-w-7xl mx-auto">
       <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-800 flex items-center">

@@ -28,9 +28,6 @@ export async function createBloodRequest(formData) {
 
   try {
     const newRequest = await Doners.create(data);
-
-    // revalidatePath('/list');
-
     return {
       success: true,
       message: 'Blood request submitted successfully!',
@@ -38,7 +35,6 @@ export async function createBloodRequest(formData) {
     };
   } catch (error) {
     console.error('Database error during request creation:', error);
-
     let errorMessage = 'Failed to submit request.';
     if (error.name === 'ValidationError') {
       errorMessage = Object.values(error.errors)
