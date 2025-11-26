@@ -6,11 +6,6 @@ import MyRequestedCard from '@/component/manage/MyRequestCard';
 import Link from 'next/link';
 import { FiArchive } from 'react-icons/fi';
 
-export const metadata = {
-  title: 'My Requests | Blood Hub',
-  description: 'Donate your blood today',
-};
-
 export const revalidate = 10;
 const session = await getServerSession(authOptions);
 
